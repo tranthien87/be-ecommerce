@@ -3,8 +3,9 @@ const express = require('express');
 const { default: helmet } = require('helmet');
 const morgan = require('morgan');
 const app = express();
+const router = require('./routes')
 require('dotenv').config()
-
+ 
 
 
 // add midlewares
@@ -15,13 +16,9 @@ app.use(compression())
 // connect database mongoose
 require('./dbs/init.mongoosedb');
 
+// router init
+app.use('/', router)
 
-
-app.get('/', (req, res) => {
-    return res.status(500).json({
-        message: "Welcome to node js !!"
-    })
-})
 
 
 
