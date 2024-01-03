@@ -16,11 +16,6 @@ var shopSchema = new Schema({
         trim:true,
         unique:true,
     },
-    mobile:{
-        type:String,
-        required:true,
-        unique:true,
-    },
     password:{
         type:String,
         required:true,

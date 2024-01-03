@@ -5,7 +5,7 @@ const dev = {
     db: {
         host: process.env.DEV_APP_HOST ||  '127.0.0.1',
         name: process.env.DEV_DB_NAME || 'shopDEV',
-        port: process.env.DEV_DB_PORT ||27017,
+        port: process.env.DEV_DB_PORT || 27017,
     }
 }
 const pro = {

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { countConnect, checkOverLoad } = require('../helpers/check.connect');
 const {db: {host, name, port}} = require('../configs/config.mongodb')
 
-const url = `mongodb://${host}:${port}/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.1`;
+const url = `mongodb://${host}:${port}/${name}`;
 console.log('connect string::', url);
 
 class Database {
@@ -12,10 +12,10 @@ class Database {
     }
 
     connect() {
-        if(1 === 1) {
-            mongoose.set('debug', true);
-            mongoose.set('debug', {color: true})
-        }
+        // if(1 === 1) {
+        //     mongoose.set('debug', true);
+        //     mongoose.set('debug', {color: true})
+        // }
         mongoose.connect(url)
         .then(() => {
             countConnect()
