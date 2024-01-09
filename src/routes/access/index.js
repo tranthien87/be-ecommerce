@@ -3,8 +3,9 @@ const { route } = require('..')
 const router = express.Router()
 
 const AccessControler = require('../../controllers/access.controller');
+const { asyncHanler } = require('../../auth/checkAuth');
 
 
-router.post('/shop/signup', AccessControler.signUp)
+router.post('/shop/signup', asyncHanler(AccessControler.signUp))
 
 module.exports = router

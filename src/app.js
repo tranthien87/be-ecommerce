@@ -24,7 +24,24 @@ require('./dbs/init.mongoosedb');
 // router init
 app.use('/', router)
 
+// Handling Not Found Error
+app.use((req, res, next) => {
+    const notFoundError = new Error('Not found!');
+    notFoundError.status = 404;
+    next(notFoundError);
+})
 
+// Handling Error
+
+app.use((error, req, res, next) => {
+    console.log('Error app.js', error );
+    const statusCode = error.status || 500;
+    res.status(statusCode).json({
+        status: 'Error',
+        code: statusCode,
+        message: error.message || 'Internal server error !'
+    })
+})
 
 
 module.exports = app;

@@ -3,9 +3,10 @@
 
 POST http://localhost:3055/v1/api/shop/signup HTTP/1.1
 Content-Type: application/json
+x-api-key: 68f32006edfac8b9d0cc272811cb9923ec151e3d79c2f205e299580a4f124e12bfaddca36a320798d8cc315c34532854b8b9194b1f1361ac3ef4c8347d50e4e4
 
 {
     "name": "Shop Shoes",
-    "email": "abc1@gmail.com",
+    "email": "shopdenjs1@gmail.com",
     "password": "234234asdsadf"
 }
