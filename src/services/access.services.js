@@ -8,6 +8,7 @@ const { getInfoData } = require("../utils")
 const { BadRequestError, AuthFailueError } = require("../core/error.response")
 const { SuccessResponse, CREATED, OK } = require("../core/success.response")
 const { findByEmail } = require("./shop.services")
+const { StatusCodes } = require("http-status-codes")
 
 const rolesShop = {
     SHOP: 'SHOP',
@@ -50,7 +51,7 @@ class AccessService {
             const holderShop = await shopModel.findOne({ email }).lean();
         
             if (holderShop) {
-               throw new BadRequestError('Error: Shop already exited!')
+               throw new BadRequestError('Error: Shop already exited!', StatusCodes.CONFLICT)
             }
             const passwordHash = await bcrypt.hash(password, 10)
 
@@ -92,11 +93,8 @@ class AccessService {
                 const tokens = await createTokenPair({userId: newShop._id, email}, publicKey, privateKey);
 
                 return {
-                    code: 201, // created new instance --- code 201
-                    metadata: {
-                        shop: getInfoData({object: newShop, fields: ['_id', 'name', 'email']}),
-                        tokens
-                    }
+                    shop: getInfoData({object: newShop, fields: ['_id', 'name', 'email']}),
+                    tokens
                 }
                 // return new CREATED({
                 //     message: 'Created!',
@@ -109,16 +107,12 @@ class AccessService {
                 
             }
 
-            // return {
-            //     code: 200, // error--- code 201
-            //     metadata: null
-            // }
-
-            return new OK({
-                message: '',
-                statusCode: 200,
+            return {
+                code: 200, // error--- code 201
                 metadata: null
-            })
+            }
+
+          
             
     }
 }
