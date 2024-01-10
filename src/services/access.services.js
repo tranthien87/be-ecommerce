@@ -5,7 +5,9 @@ const crypto = require('crypto')
 const KeyTokenServices = require("./keyToken.services")
 const { createTokenPair } = require("../auth/authUtils")
 const { getInfoData } = require("../utils")
-const { BadRequestError } = require("../core/error.response")
+const { BadRequestError, AuthFailueError } = require("../core/error.response")
+const { SuccessResponse, CREATED, OK } = require("../core/success.response")
+const { findByEmail } = require("./shop.services")
 
 const rolesShop = {
     SHOP: 'SHOP',
@@ -15,9 +17,35 @@ const rolesShop = {
 }
 class AccessService {
 
+    static login = async ({email, password, refreshToken = {}}) => {
+        const foundShop = await findByEmail({ email });
+        if (!foundShop) {
+            throw new BadRequestError('Shop not registered!')
+        }
+
+        const match = bcrypt.compare(password, foundShop.password);
+        if (!match) {
+            throw new AuthFailueError('Authentication error!')
+        }
+        const privateKey = crypto.randomBytes(64).toString('hex');
+        const publicKey = crypto.randomBytes(64).toString('hex');
+
+        const tokens = await createTokenPair({userId: foundShop._id, email}, publicKey, privateKey);
+        await KeyTokenServices.createKeyToken({
+            userId: foundShop._id,
+            publicKey,
+            privateKey,
+            refreshToken: tokens.refreshToken
+        })
+
+        return {
+            shop: getInfoData({object: foundShop, fields: ['_id', 'name', 'email']}),
+            tokens
+        }
+    }
+
     static signUp = async ({name, email, password}) => {
         
-        // try {
             // step 1: check email is exit
             const holderShop = await shopModel.findOne({ email }).lean();
         
@@ -53,14 +81,15 @@ class AccessService {
                 })
                
                 if (!keyStore) {
-                    return  {
-                        code: 'xxx',
-                        message: 'keyStore error'
-                    }
+                    throw new BadRequestError('Error: keyStore error!')
+                    // return  {
+                    //     code: 'xxx',
+                    //     message: 'keyStore error'
+                    // }
                 }
 
                 // create token pair
-                const tokens = await createTokenPair({userId: newShop._id, email}, publicKey, privateKey)
+                const tokens = await createTokenPair({userId: newShop._id, email}, publicKey, privateKey);
 
                 return {
                     code: 201, // created new instance --- code 201
@@ -69,23 +98,28 @@ class AccessService {
                         tokens
                     }
                 }
+                // return new CREATED({
+                //     message: 'Created!',
+                //     statusCode: 201,
+                //     metadata: {
+                //         shop: getInfoData({object: newShop, fields: ['_id', 'name', 'email']}),
+                //         tokens
+                //     }
+                // })
                 
             }
 
-            return {
-                code: 200, // error--- code 201
-                metadata: null
-            }
-            
-            
-        // } catch (error) {
-        //     return {
-        //         code: 'xxx',
-        //         message: error.message,
-        //         status: error
+            // return {
+            //     code: 200, // error--- code 201
+            //     metadata: null
+            // }
 
-        //     }
-        // }
+            return new OK({
+                message: '',
+                statusCode: 200,
+                metadata: null
+            })
+            
     }
 }
 module.exports = AccessService

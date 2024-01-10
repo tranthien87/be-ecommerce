@@ -1,8 +1,17 @@
 'use strict'
-const { CREATED } = require('../core/success.response')
+const { StatusCodes } = require('http-status-codes')
+const { CREATED, SuccessResponse } = require('../core/success.response')
 const AccessService = require('../services/access.services')
 
 class AccessControler {
+    login = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success login!',
+            statusCode: StatusCodes.ACCEPTED,
+            metadata:  await AccessService.login(req.body),
+        
+        }).send(res)   
+    }
 
     signUp = async(req,res, next) => {
 

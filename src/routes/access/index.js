@@ -7,5 +7,6 @@ const { asyncHanler } = require('../../auth/checkAuth');
 
 
 router.post('/shop/signup', asyncHanler(AccessControler.signUp))
+router.post('/shop/login', asyncHanler(AccessControler.login))
 
 module.exports = router
