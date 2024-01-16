@@ -2,6 +2,7 @@
 
 const { filter } = require("lodash");
 const keytokenModel = require("../models/keytoken.model");
+const { Types } = require("mongoose");
 
 class KeyTokenServices {
     
@@ -36,6 +37,15 @@ class KeyTokenServices {
         return error
        }
     }
+
+    static findByUserId = async (userId) => {
+        return keytokenModel.findOne({ user: new Types.ObjectId(userId)}).lean();
+    }
+
+    static removeKeyById = async (userId) => {
+        const result = await keytokenModel.deleteOne({ _id: new Types.ObjectId(userId)})
+        return result
+    }
 }
 
-module.exports = KeyTokenServices
+module.exports = {KeyTokenServices}

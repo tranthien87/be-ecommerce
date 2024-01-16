@@ -2,7 +2,7 @@ const shopModel = require("../models/shop.model")
 const bcrypt = require('bcrypt')
 const { log } = require("console")
 const crypto = require('crypto')
-const KeyTokenServices = require("./keyToken.services")
+const {KeyTokenServices} = require("./keyToken.services")
 const { createTokenPair } = require("../auth/authUtils")
 const { getInfoData } = require("../utils")
 const { BadRequestError, AuthFailueError } = require("../core/error.response")
@@ -19,19 +19,22 @@ const rolesShop = {
 class AccessService {
 
     static login = async ({email, password, refreshToken = {}}) => {
+
         const foundShop = await findByEmail({ email });
+        
         if (!foundShop) {
             throw new BadRequestError('Shop not registered!')
         }
 
         const match = bcrypt.compare(password, foundShop.password);
         if (!match) {
-            throw new AuthFailueError('Authentication error!')
+            throw new AuthFailueError('Password incorrect!')
         }
         const privateKey = crypto.randomBytes(64).toString('hex');
         const publicKey = crypto.randomBytes(64).toString('hex');
 
         const tokens = await createTokenPair({userId: foundShop._id, email}, publicKey, privateKey);
+
         await KeyTokenServices.createKeyToken({
             userId: foundShop._id,
             publicKey,
@@ -43,6 +46,9 @@ class AccessService {
             shop: getInfoData({object: foundShop, fields: ['_id', 'name', 'email']}),
             tokens
         }
+    }
+    static logout = async ({keyStore}) => {
+        return await KeyTokenServices.removeKeyById(keyStore._id)
     }
 
     static signUp = async ({name, email, password}) => {
@@ -68,7 +74,6 @@ class AccessService {
                 //       privateKeyEncoding: {
                 //         type: 'pkcs8',
                 //         format: 'pem',
-
                 //       },
                 // })
                 const privateKey = crypto.randomBytes(64).toString('hex');
@@ -82,11 +87,7 @@ class AccessService {
                 })
                
                 if (!keyStore) {
-                    throw new BadRequestError('Error: keyStore error!')
-                    // return  {
-                    //     code: 'xxx',
-                    //     message: 'keyStore error'
-                    // }
+                    throw new BadRequestError('Create keyStore error!');
                 }
 
                 // create token pair
