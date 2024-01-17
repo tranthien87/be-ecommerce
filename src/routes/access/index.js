@@ -12,5 +12,5 @@ router.post('/shop/login', asyncHanler(AccessControler.login))
 router.use(authentication)
 
 router.post('/shop/logout', asyncHanler(AccessControler.logout))
-
+router.post('/shop/handlerRefreshToken', asyncHanler(AccessControler.handlerRefreshToken))
 module.exports = router
