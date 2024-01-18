@@ -9,6 +9,7 @@ const { BadRequestError, AuthFailueError, ForbiddenError } = require("../core/er
 const { SuccessResponse, CREATED, OK } = require("../core/success.response")
 const { findByEmail } = require("./shop.services")
 const { StatusCodes } = require("http-status-codes")
+const { keys } = require("lodash")
 
 const rolesShop = {
     SHOP: 'SHOP',
@@ -17,6 +18,39 @@ const rolesShop = {
     ADMIN: 'ADMIN'
 }
 class AccessService {
+    static handlerRefreshTokenV2 = async ({refreshToken, user, keyStore}) => {
+
+        const {userId, email} = user;
+
+        if(keyStore.refreshTokenUsed.includes(refreshToken)) {
+            await KeyTokenServices.deleteKeyById(userId);
+            throw new ForbiddenError('Something wrong happened! Pls re-login')
+        }
+        if(keyStore.refreshToken !==  refreshToken)  throw new AuthFailueError('Shop not registered')
+
+        
+        const foundShop = findByEmail({email});
+       
+        if (!foundShop) {
+            throw new AuthFailueError('Shop not registered')
+        }
+        // create new pair tokens
+        const tokens = await createTokenPair({userId, email}, keyStore.publicKey, keyStore.privateKey);
+       
+        // update token
+        await keyStore.updateOne({
+            $set: {
+                refreshToken: tokens.refreshToken
+            },
+            $addToSet: {
+                refreshTokenUsed: refreshToken
+            }
+        })
+        return {
+            user,
+            tokens
+        }
+    }
     static handlerRefreshToken = async (refreshToken) => {
         // check refreshToken was used
         const refreshTokenUsed = await KeyTokenServices.findByRefreshTokenUsed(refreshToken);
