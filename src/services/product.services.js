@@ -6,10 +6,10 @@ const { product, clothing, electronic } = require("../models/product.model")
 class ProductFactory {
     static async createProduct (type, payload) {
         switch (type) {
-            case 'clothing':
+            case 'Clothing':
                 return new Clothing(payload).createProduct()
                 break;
-            case 'electronic':
+            case 'Electronic':
                 return new Electronic(payload).createProduct()
                 break;
             default:
