@@ -2,11 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const asyncHanler = require('../../helpers/asyncHandler');
-const { authentication } = require('../../auth/checkAuth');
+const { authenticationV2 } = require('../../auth/checkAuth');
 const productController = require('../../controllers/product.controller');
 
 
-router.use(authentication)
+router.use(authenticationV2)
 
 router.post('/', asyncHanler(productController.createNewProduct))
 

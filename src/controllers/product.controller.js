@@ -6,6 +6,7 @@ const ProductServices = require("../services/product.services")
 
 class ProductController {
     createNewProduct = async (req, res, next) => {
+        console.log(req.body)
         return new SuccessResponse({
             message: 'Success created new product!',
             statusCode: StatusCodes.CREATED,

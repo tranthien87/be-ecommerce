@@ -91,6 +91,7 @@ const permissions = (permission) => {
 
 // })
 const authenticationV2 = asyncHandler(async (req, res, next) => {
+  console.log(req.headers)
     /**** 
      * 1. check userId missing ?
      * 2. get accessToken
@@ -107,9 +108,9 @@ const authenticationV2 = asyncHandler(async (req, res, next) => {
     const keyStore = await KeyTokenServices.findByUserId(userId);
     if (!keyStore) throw new NotFoundError('Not found keystore');
 
-    if(req.headers[REFRESHTOKEN]) {
+    if(req.headers[HEADER.REFRESHTOKEN]) {
       try {
-        const refreshToken = req.headers[REFRESHTOKEN];
+        const refreshToken = req.headers[HEADER.REFRESHTOKEN];
         const decodeUser = jwt.verify(refreshToken, keyStore.privateKey);
         if(decodeUser.userId !== userId) throw new AuthFailueError('Invalid userID!');
         req.keyStore = keyStore;
@@ -138,4 +139,4 @@ const authenticationV2 = asyncHandler(async (req, res, next) => {
 
 })
 
-module.exports = { apiKey , permissions, authentication, authenticationV2 }
+module.exports = { apiKey , permissions, authenticationV2 }
