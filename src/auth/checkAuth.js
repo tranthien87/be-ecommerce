@@ -91,7 +91,6 @@ const permissions = (permission) => {
 
 // })
 const authenticationV2 = asyncHandler(async (req, res, next) => {
-  console.log(req.headers)
     /**** 
      * 1. check userId missing ?
      * 2. get accessToken
@@ -130,6 +129,7 @@ const authenticationV2 = asyncHandler(async (req, res, next) => {
       if (decode.userId !== userId) {
         throw new AuthFailueError('Invalid userId')
       }
+      req.user = decode;
 
       req.keyStore = keyStore;
      return next()
