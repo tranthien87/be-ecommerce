@@ -4,7 +4,9 @@ const { BadRequestError } = require("../core/error.response")
 const { product, clothing, electronic, furniture } = require("../models/product.model")
 const { findAllDraftsForShop, 
     publicProductByShop,
-    findAllPublicForShop
+    findAllPublicForShop,
+    unPublishProductByShop,
+    searchProductByUser
  } = require('../models/repositories/product.repo')
 
 class ProductFactory {
@@ -31,9 +33,19 @@ class ProductFactory {
         const query = { product_shop, isPublish: true};
         return await findAllPublicForShop({ query, limit, skip})
     }
+
+    static async searchProductByUser({keySearch}) {
+        return await searchProductByUser({keySearch})
+    }
+    // END QUERY //
+
+
     // PUT //
     static async publicDraftProductByShop({product_shop, product_id}) {
         return await publicProductByShop({product_shop, product_id})
+    }
+    static async unPublicProductByShop({product_shop, product_id}) {
+        return await unPublishProductByShop({product_shop, product_id})
     }
     // END PUT //
 }

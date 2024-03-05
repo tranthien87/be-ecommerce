@@ -22,7 +22,7 @@ class Database {
         mongoose.connect(url)
         .then(() => {
             countConnect()
-            console.log(`Mongoose database connected sucessfull!`);
+            console.log(`Mongoose database connected successfull!`);
             // console.log('Checking overload:::', checkOverLoad());
     
         })

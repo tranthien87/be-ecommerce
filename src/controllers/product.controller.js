@@ -29,6 +29,17 @@ class ProductController {
         
         }).send(res); 
     }
+    unPublishProductByShop = async (req, res , next) => {
+        return new SuccessResponse({
+            message: 'Success un-publish product!',
+            statusCode: StatusCodes.OK,
+            metadata:  await ProductServicesv2.unPublicProductByShop({
+                product_id: req.params.id,
+                product_shop: req.user.userId
+            }),
+        
+        }).send(res); 
+    }
     // END PUT //
 
 
@@ -49,6 +60,13 @@ class ProductController {
             metadata: await ProductServicesv2.getProductsPublicByShop({
                 product_shop: req.user.userId
             })
+        }).send(res);
+    }
+    getListSearchProduct = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success get list search products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.searchProductByUser(req.params)
         }).send(res);
     }
     // END QUERY //
