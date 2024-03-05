@@ -2,13 +2,18 @@
 
 const { BadRequestError } = require("../core/error.response")
 const { product, clothing, electronic, furniture } = require("../models/product.model")
-const { findAllDraftsForShop } = require('../models/repositories/product.repo')
+const { findAllDraftsForShop, 
+    publicProductByShop,
+    findAllPublicForShop
+ } = require('../models/repositories/product.repo')
 
 class ProductFactory {
     static productRegistery = {};
+
     static registryProductType(type, classRef) {
         ProductFactory.productRegistery[type] = classRef;
     }
+    
     static async createProduct(type, payload) {
         const productClass = ProductFactory.productRegistery[type];
         if (!productClass) {
@@ -17,11 +22,20 @@ class ProductFactory {
         return new productClass(payload).createProduct();
     }
 
-    static async getProductsDraff({product_shop, limit = 50, skip = 0}) {
-        console.log('product_shop', product_shop);
+    // QUERY //
+    static async getProductsDraftByShop({product_shop, limit = 50, skip = 0}) {
         const query = { product_shop, isDraft: true};
         return await findAllDraftsForShop({ query, limit, skip})
     }
+    static async getProductsPublicByShop({product_shop, limit = 50, skip = 0}) {
+        const query = { product_shop, isPublish: true};
+        return await findAllPublicForShop({ query, limit, skip})
+    }
+    // PUT //
+    static async publicDraftProductByShop({product_shop, product_id}) {
+        return await publicProductByShop({product_shop, product_id})
+    }
+    // END PUT //
 }
 
 class Product {
@@ -30,21 +44,32 @@ class Product {
         product_name,
         product_thumb,
         product_description,
+        product_slug,
         product_number,
         product_quantity,
         product_type,
         product_shop,
-        product_attributes
+        product_attributes,
+        product_variations,
+        product_ratingAverage,
+        isDraft,
+        isPublish
+
     }
     ) {
         this.product_thumb = product_thumb,
         this.product_name = product_name,
+        this.product_slug = product_slug,
         this.product_description = product_description,
         this.product_number = product_number,
         this.product_quantity = product_quantity,
         this.product_type = product_type,
         this.product_shop = product_shop,
-        this.product_attributes = product_attributes
+        this.product_attributes = product_attributes,
+        this.product_variations = product_variations,
+        this.product_ratingAverage = product_ratingAverage,
+        this.isDraft = isDraft,
+        this.isPublish = isPublish
     }
     async createProduct(product_id) {
         return await product.create({...this, _id: product_id})

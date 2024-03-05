@@ -3,8 +3,11 @@ const mongoose = require('mongoose');
 const { countConnect, checkOverLoad } = require('../helpers/check.connect');
 const {db: {host, name, port}} = require('../configs/config.mongodb')
 
-const url = `mongodb://${host}:${port}/${name}`;
-console.log('connect string::', url);
+// const url = `mongodb://${host}:${port}/${name}`;
+const username = encodeURIComponent('be');
+const password = encodeURIComponent('abc@1234');
+const url = `mongodb+srv://${username}:${password}@cluster0.vwxcp.mongodb.net/shopDev?retryWrites=true&w=majority&appName=Cluster0`
+
 
 class Database {
     constructor() {

@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./routes')
 
- 
 
 
 // add midlewares
@@ -22,7 +21,7 @@ app.use(express.urlencoded({
 require('./dbs/init.mongoosedb');
 
 // router init
-app.use('/', router)
+app.use('/', router);
 
 // Handling Not Found Error
 app.use((req, res, next) => {

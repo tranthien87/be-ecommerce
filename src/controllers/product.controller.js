@@ -17,6 +17,19 @@ class ProductController {
         
         }).send(res);
     }
+    // PUT //
+    publishProductByShop = async (req, res , next) => {
+        return new SuccessResponse({
+            message: 'Success publish product!',
+            statusCode: StatusCodes.OK,
+            metadata:  await ProductServicesv2.publicDraftProductByShop({
+                product_id: req.params.id,
+                product_shop: req.user.userId
+            }),
+        
+        }).send(res); 
+    }
+    // END PUT //
 
 
   // QUERY //
@@ -24,7 +37,16 @@ class ProductController {
         return new SuccessResponse({
             message: 'Success get list draff products',
             statusCode: StatusCodes.OK,
-            metadata: await ProductServicesv2.getProductsDraff({
+            metadata: await ProductServicesv2.getProductsDraftByShop({
+                product_shop: req.user.userId
+            })
+        }).send(res);
+    }
+    getListPublicProduct = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success get list public products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.getProductsPublicByShop({
                 product_shop: req.user.userId
             })
         }).send(res);
