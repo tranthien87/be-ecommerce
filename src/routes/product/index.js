@@ -5,7 +5,9 @@ const asyncHanler = require('../../helpers/asyncHandler');
 const { authenticationV2 } = require('../../auth/checkAuth');
 const productController = require('../../controllers/product.controller');
 
-router.get('/search/:keysearch', asyncHanler(productController.getListSearchProduct))
+router.get('/search/:keySearch', asyncHanler(productController.getListSearchProduct))
+router.get('', asyncHanler(productController.findAllProducts))
+router.get('/:product_id', asyncHanler(productController.findProduct))
 
 router.use(authenticationV2)
 

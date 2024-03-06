@@ -6,10 +6,13 @@ const { findAllDraftsForShop,
     publicProductByShop,
     findAllPublicForShop,
     unPublishProductByShop,
-    searchProductByUser
+    searchProductByUser,
+    findAllProducts,
+    findProductById
  } = require('../models/repositories/product.repo')
 
 class ProductFactory {
+
     static productRegistery = {};
 
     static registryProductType(type, classRef) {
@@ -37,6 +40,12 @@ class ProductFactory {
     static async searchProductByUser({keySearch}) {
         return await searchProductByUser({keySearch})
     }
+    static async findAllProducts({page = 1, limit = 50, sort = 'ctime', filters = { isPublish: true}, select}) {
+        return await findAllProducts({page, limit, sort, filters, select: ['product_name', 'product_price', 'product_thumb']})
+    }
+    static async findProduct({product_id, }) {
+        return await findProductById({product_id, unSelect: ['__v', 'product_variations']})
+    }
     // END QUERY //
 
 
@@ -57,7 +66,7 @@ class Product {
         product_thumb,
         product_description,
         product_slug,
-        product_number,
+        product_price,
         product_quantity,
         product_type,
         product_shop,
@@ -73,7 +82,7 @@ class Product {
         this.product_name = product_name,
         this.product_slug = product_slug,
         this.product_description = product_description,
-        this.product_number = product_number,
+        this.product_price = product_price,
         this.product_quantity = product_quantity,
         this.product_type = product_type,
         this.product_shop = product_shop,

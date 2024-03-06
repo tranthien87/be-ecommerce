@@ -69,6 +69,22 @@ class ProductController {
             metadata: await ProductServicesv2.searchProductByUser(req.params)
         }).send(res);
     }
+    findAllProducts = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success get all products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.findAllProducts(req.query)
+        }).send(res);
+    }
+
+    findProduct = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success find a products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.findProduct({product_id: req.params.product_id})
+        }).send(res);
+    }
+
     // END QUERY //
 }
 

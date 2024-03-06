@@ -1,6 +1,7 @@
 
 const { Types, Schema } = require('mongoose');
 const { product, electronic, clothing, furniture } = require('../product.model');
+const {getSelectData, unGetSelectData} = require('../../utils')
 
 
 const findAllDraftsForShop = async ({query, limit, skip}) => {
@@ -14,6 +15,7 @@ const findAllPublicForShop = async ({query, limit, skip}) => {
 const searchProductByUser = async ({keySearch}) => {
 
     const keySearchRegex = new RegExp(keySearch);
+    console.log('key search', keySearch, keySearchRegex)
 
     const result = await product.find({
         isPublish: true,
@@ -23,6 +25,23 @@ const searchProductByUser = async ({keySearch}) => {
     .lean();
 
     return result;
+}
+
+const findAllProducts = async ({page, limit, sort, filters, select}) => {
+    const skip = (page - 1) * limit;
+    const sortBy = sort === 'ctime' ? {sort: -1} : {sort: 1};
+    const result = await product.find(filters)
+    .sort(sortBy)
+    .skip(skip)
+    .limit(limit)
+    .select(getSelectData(select))
+    .lean()
+
+    return result;
+}
+
+const findProductById = async ({product_id, unSelect}) => {
+    return await product.findById(product_id).select(unGetSelectData(unSelect))
 }
 
 const publicProductByShop = async ({product_shop, product_id}) => {
@@ -65,5 +84,7 @@ module.exports = {
     publicProductByShop,
     findAllPublicForShop,
     unPublishProductByShop,
-    searchProductByUser
+    searchProductByUser,
+    findAllProducts,
+    findProductById
 }
