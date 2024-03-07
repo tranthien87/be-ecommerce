@@ -8,7 +8,8 @@ const { findAllDraftsForShop,
     unPublishProductByShop,
     searchProductByUser,
     findAllProducts,
-    findProductById
+    findProductById,
+    updateProductById
  } = require('../models/repositories/product.repo')
 
 class ProductFactory {
@@ -26,12 +27,20 @@ class ProductFactory {
         }
         return new productClass(payload).createProduct();
     }
+    static async updateProduct(type, productId, payload) {
+        const productClass = ProductFactory.productRegistery[type];
+        if (!productClass) {
+            return new BadRequestError(`Invalid product type:: ${type}`)
+        }
+        return new productClass(payload).updateProduct(productId);
+    }
 
     // QUERY //
     static async getProductsDraftByShop({product_shop, limit = 50, skip = 0}) {
         const query = { product_shop, isDraft: true};
         return await findAllDraftsForShop({ query, limit, skip})
     }
+
     static async getProductsPublicByShop({product_shop, limit = 50, skip = 0}) {
         const query = { product_shop, isPublish: true};
         return await findAllPublicForShop({ query, limit, skip})
@@ -40,9 +49,11 @@ class ProductFactory {
     static async searchProductByUser({keySearch}) {
         return await searchProductByUser({keySearch})
     }
+
     static async findAllProducts({page = 1, limit = 50, sort = 'ctime', filters = { isPublish: true}, select}) {
         return await findAllProducts({page, limit, sort, filters, select: ['product_name', 'product_price', 'product_thumb']})
     }
+
     static async findProduct({product_id, }) {
         return await findProductById({product_id, unSelect: ['__v', 'product_variations']})
     }
@@ -95,6 +106,9 @@ class Product {
     async createProduct(product_id) {
         return await product.create({...this, _id: product_id})
     }
+    async updateProduct(productId) {
+        return await updateProductById({productId, ...this, model: product});
+    }
 }
 
 class Clothing extends Product {
@@ -109,6 +123,15 @@ class Clothing extends Product {
             throw new BadRequestError('Create new product error!') 
         }
         return newProduct;
+    }
+
+    async updateProduct(productId) {
+        const objParams = this;
+        if (objParams.product_attributes) {
+             await updateProductById({productId, objParams, model: clothing});
+        }
+        const updateProduct = await super.updateProduct(productId, objParams);
+        return updateProduct;
     }
 }
 
