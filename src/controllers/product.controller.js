@@ -17,6 +17,17 @@ class ProductController {
         
         }).send(res);
     }
+    updateProduct = async (req, res, next) => {  
+        return new SuccessResponse({
+            message: 'Success created new product!',
+            statusCode: StatusCodes.CREATED,
+            metadata:  await ProductServicesv2.updateProduct(req.body.product_type, req.params.productId, {
+                ...req.body,
+                product_shop: req.user.userId
+            }),
+        
+        }).send(res);
+    }
     // PUT //
     publishProductByShop = async (req, res , next) => {
         return new SuccessResponse({
@@ -69,6 +80,22 @@ class ProductController {
             metadata: await ProductServicesv2.searchProductByUser(req.params)
         }).send(res);
     }
+    findAllProducts = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success get all products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.findAllProducts(req.query)
+        }).send(res);
+    }
+
+    findProduct = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success find a products',
+            statusCode: StatusCodes.OK,
+            metadata: await ProductServicesv2.findProduct({product_id: req.params.product_id})
+        }).send(res);
+    }
+
     // END QUERY //
 }
 
