@@ -15,7 +15,6 @@ const findAllPublicForShop = async ({query, limit, skip}) => {
 const searchProductByUser = async ({keySearch}) => {
 
     const keySearchRegex = new RegExp(keySearch);
-    console.log('key search', keySearch, keySearchRegex)
 
     const result = await product.find({
         isPublish: true,
@@ -46,11 +45,11 @@ const findProductById = async ({product_id, unSelect}) => {
 
 const updateProductById = async ({
     productId,
-    bodyUpdate,
+    objParams,
     model,
     isNew = true
 }) => {
-    return await model.findByIdAndUpdate(productId, bodyUpdate, {
+    return await model.findByIdAndUpdate(productId, objParams, {
         new: isNew
     })
 }

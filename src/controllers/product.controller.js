@@ -19,7 +19,7 @@ class ProductController {
     }
     updateProduct = async (req, res, next) => {  
         return new SuccessResponse({
-            message: 'Success created new product!',
+            message: 'Success update product!',
             statusCode: StatusCodes.CREATED,
             metadata:  await ProductServicesv2.updateProduct(req.body.product_type, req.params.productId, {
                 ...req.body,
