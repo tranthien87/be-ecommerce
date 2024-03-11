@@ -20,8 +20,8 @@ const removeUndefineObject = (obj) => {
     })
     return obj;
 }
-const updateNestedObjectParser = obj => {
-   
+const updateNestedObjectParser = object => {
+    let obj = removeUndefineObject(object);
     let final = {};
     Object.keys(obj).map(k => {
         if(typeof obj[k] === 'object' && !Array.isArray(obj[k])) {
