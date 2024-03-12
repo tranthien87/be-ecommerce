@@ -2,6 +2,8 @@
 
 const { BadRequestError } = require("../core/error.response")
 const { product, clothing, electronic, furniture } = require("../models/product.model")
+const {insertInventory} = require('../models/repositories/inventory.repo');
+
 
 class ProductFactory {
     static async createProduct (type, payload) {
@@ -41,7 +43,17 @@ class Product {
         this.product_attributes = product_attributes
     }
     async createProduct(product_id) {
-        return await product.create({...this, _id: product_id})
+        const product =  await product.create({...this, _id: product_id});
+        if(product) {
+            // add sotck in inventory collection
+            const inventoried = await insertInventory({
+                productId: product._id,
+                shopId:  this.product_shop,
+                stock:  this.product_quantity
+            })
+            console.log('inserted inventory', inventoried)
+        }
+        return product;
     }
 }
 
