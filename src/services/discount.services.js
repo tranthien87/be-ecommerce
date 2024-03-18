@@ -40,9 +40,6 @@ class DiscountServices {
             product_ids, 
         } = payload;
 
-        if(new Date() < new Date(start_date) || new Date() > new Date(end_date)) {
-            throw new BadRequestError('Discount code has expired')
-        }
 
         if(new Date(start_date) >= new Date(end_date)) {
             throw new BadRequestError('Start date must be before end date')
@@ -97,6 +94,7 @@ class DiscountServices {
         if (!foundDiscountCode || !foundDiscountCode.discount_is_active) {
             throw new NotFoundError('Discount code not found.')
         }
+    
 
         const { discount_applies_to, discount_product_ids} = foundDiscountCode;
 
@@ -104,7 +102,7 @@ class DiscountServices {
 
         if(discount_applies_to === 'all') {
             products = await findAllProducts({
-                filter: {
+                filters: {
                     product_shop: convertToObjectIdMongo(shopId),
                     isPublish: true
                 },
@@ -116,7 +114,7 @@ class DiscountServices {
         }
         if(discount_applies_to === 'specific') {
             products = await findAllProducts({
-                filter: {
+                filters: {
                     _id: {$in: discount_product_ids},
                     isPublish: true
                 },
@@ -125,6 +123,7 @@ class DiscountServices {
                 sort: 'ctime',
                 select: ['product_name']
             }) 
+        
         }
         return products;
     }
