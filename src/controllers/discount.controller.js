@@ -25,6 +25,26 @@ class DiscountController {
         
         }).send(res);
     }
+    getAllDiscountCode = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Success all discount code by shop!',
+            statusCode: StatusCodes.OK,
+            metadata:  await discountServices.getAllDiscountCodeByShop({
+                ...req.query
+            }),
+        
+        }).send(res);
+    }
+    getDiscountAmount = async (req, res, next) => {
+        return new SuccessResponse({
+            message: 'Successfull get discount amount!',
+            statusCode: StatusCodes.OK,
+            metadata:  await discountServices.applyDiscountCode({
+                ...req.body
+            }),
+        
+        }).send(res);
+    }
 }
 
 module.exports = new DiscountController()

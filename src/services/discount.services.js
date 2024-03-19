@@ -136,15 +136,15 @@ class DiscountServices {
             shopId, page , limit
         } = payload;
 
-        const discountCodes = await findAllDiscountCodeUnSelect({
+        const discountCodes = await findAllDiscountCodeSelect({
             limit,
             page,
             model: discount,
-            filter: {
+            filters: {
                 discount_shopId: convertToObjectIdMongo(shopId),
                 discount_is_active: true
             },
-            unSelect: ['__v', 'discount_shopId' ]
+            select: ['discount_name', 'discount_code' ]
         })
         return discountCodes;
     }
@@ -183,7 +183,7 @@ class DiscountServices {
 
         if(!discount_is_active) throw new BadRequestError('Discount is not active yet!');
         if(!discount_max_users) throw new BadRequestError('Discount code has been used up!');
-        if(new Date() < new Date(discount_start_date) || new Date() > new Date(discount_end_date)) {
+        if(new Date() > new Date(discount_end_date)) {
             throw new BadRequestError('Discount code has expired')
         }
         // check cost order products is match min order

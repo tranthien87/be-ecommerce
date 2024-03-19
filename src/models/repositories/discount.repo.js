@@ -6,7 +6,7 @@ const checkDiscountCodeExit = async ({model, filter}) => {
 }
 
 const findAllDiscountCodeUnSelect = async ({
-    limit = 50, page = 1, filter , model, sort = 'ctime', unSelect
+    limit = 50, page = 1, filters , model, sort = 'ctime', unSelect
 }) => {
     const skip = (page - 1) * limit;
     const sortBy = sort === 'ctime' ? {sort: -1} : {sort: 1};
@@ -14,13 +14,13 @@ const findAllDiscountCodeUnSelect = async ({
     .sort(sortBy)
     .skip(skip)
     .limit(limit)
-    .select(unGetSelectData(select))
+    .select(unGetSelectData(unSelect))
     .lean()
 
     return result;
 }
 const findAllDiscountCodeSelect = async ({
-    limit = 50, page = 1, filter , model, sort = 'ctime', unSelect
+    limit = 50, page = 1, filters , model, sort = 'ctime', select
 }) => {
     const skip = (page - 1) * limit;
     const sortBy = sort === 'ctime' ? {sort: -1} : {sort: 1};
