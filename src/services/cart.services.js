@@ -1,6 +1,7 @@
 'use strict'
 
 const { cart } = require('../models/cart.model');
+const {findProductByIdCart} = require('../models/repositories/product.repo');
 
 class CartServices {
     /**
@@ -46,6 +47,7 @@ class CartServices {
         }
         return await cart.findOneAndUpdate(filter, updateSet, options);
     }
+
     // End repo cart
 
     static async addProductToCart({userId, product = {}}) {
@@ -64,6 +66,58 @@ class CartServices {
         }
         // increase product quantity
         return await CartServices.updateCartQuantity({userId, product})
+    }
+
+    /***
+     * update cart
+     * shop_order_ids: [
+     *  {
+     *      shopId,
+     *      item_products: [{
+     *          quantity,
+     *          price,
+     *          shopId,
+     *          old_quantity,
+     *          product_Id
+     *      }],
+     *      version   
+     *  }
+     * ]
+    */
+
+    static async addToCart({ userId, product = {}}) {
+        // check product already to added
+        const { productId, quantity, old_quantity } = shop_order_ids[0]?.item_products[0];
+        const foundProduct = await findProductByIdCart({productId});
+        if(!foundProduct) throw new NotFoundError('Product not found!');
+        if(foundProduct.product_shop.toString !== shop_order_ids[0]?.shopId) {
+            throw new NotFoundError('Product not belong of shop!');
+        }
+        if(quantity === 0) {
+            // remove product of cart
+        }
+
+        return await CartServices.updateCartQuantity({userId, product: {
+            productId,
+            quantity: quantity - old_quantity
+        }})
+
+    }
+
+    static async deleteUserCart({userId, productId}) {
+        const  query = {
+            cart_userId: userId,
+            cart_state: 'active'
+        }
+        const updateSet = {
+            $pull: {
+                cart_products: {
+                    productId
+                }
+            }
+        }
+        const cartDeleted = await cart.updateOne(query, updateSet);
+        return cartDeleted;
     }
 }
 
