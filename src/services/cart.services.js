@@ -29,6 +29,7 @@ class CartServices {
         }
         return await cart.findOneAndUpdate(filter, updateOrInsert, options);
     }
+    
     static async updateCartQuantity({userId, product}) {
         const {productId, quantity} = product;
         const filter = {
