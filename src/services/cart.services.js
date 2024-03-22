@@ -85,7 +85,7 @@ class CartServices {
      * ]
     */
 
-    static async addToCart({ userId, product = {}}) {
+    static async addToCart({ userId, shop_order_ids = {}}) {
         // check product already to added
         const { productId, quantity, old_quantity } = shop_order_ids[0]?.item_products[0];
         const foundProduct = await findProductByIdCart({productId});
@@ -104,7 +104,7 @@ class CartServices {
 
     }
 
-    static async deleteUserCart({userId, productId}) {
+    static async deleteItemInCart({userId, productId}) {
         const  query = {
             cart_userId: userId,
             cart_state: 'active'
@@ -118,6 +118,12 @@ class CartServices {
         }
         const cartDeleted = await cart.updateOne(query, updateSet);
         return cartDeleted;
+    }
+
+    static async getListUserCart({userId}) {
+        return cart.findOne({
+            cart_userId: +userId
+        }).lean();
     }
 }
 
