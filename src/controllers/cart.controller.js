@@ -5,6 +5,7 @@ const {SuccessResponse} = require('../core/success.response');
 
 
 class CartController {
+    
     createCart = async (req, res, next) => {
         return new SuccessResponse({
             message: "Successfull create new cart",
@@ -30,7 +31,7 @@ class CartController {
         return new SuccessResponse({
             message: "Successfull delete cart",
             statusCode: StatusCodes.OK,
-            metadata: await CartServices.getListUserCart(req.body)
+            metadata: await CartServices.getListUserCart(req.query)
         }).send(res)
     }
 }
