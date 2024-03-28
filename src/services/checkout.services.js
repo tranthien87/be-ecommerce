@@ -111,6 +111,16 @@ class CheckoutServices {
 
     }
 
+    static async orderByUser({shop_order_ids, cartId, userId, checkout_address = {}, checkout_payment = {}}) {
+        const {shop_order_ids_new, checkout_orders} = CheckoutServices.checkoutReview({cartId, userId, shop_order_ids});
+        const products = shop_order_ids_new.flatMap(order => order.item_products);
+        // check inventory use optimissted key - redis 
+        for (let i = 0; i < products.length; i++) {
+            const {productId, quantity} = products[i];
+            
+        }
+    }
+
 }
 
 module.exports = CheckoutServices
