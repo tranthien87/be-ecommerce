@@ -11,7 +11,7 @@ class CheckoutServices {
      * {
      *      cartId,
      *      userId,
-     *      shop-order_ids: [
+     *      shop_order_ids: [
      *          {
      *              shopId,
      *              shop_discounts: [],
@@ -55,12 +55,12 @@ class CheckoutServices {
 
         // calc total price orders
         for (let i = 0; i < shop_order_ids.length; i++) {
-            const {shopId, shop_discounts, item_products = []} = shop_order_ids[i]
+            const {shopId, shop_discounts, item_products } = shop_order_ids[i]
 
             // checking product
 
             const checkProducts = await checkProductByServer(item_products);
-            console.log("🚀 ~ CheckoutServices ~ checkoutReview ~ checkProduct:", checkProduct)
+            console.log("🚀 ~ CheckoutServices ~ checkoutReview ~ checkProduct:", checkProducts)
             if(!checkProducts[0]) throw BadRequestError('order wrong')
             
             const checkoutPrice = checkProducts.reduce((acc, product) => {
@@ -81,7 +81,7 @@ class CheckoutServices {
             // if shop_discounts > 0
             if(shop_discounts.length > 0) {
                 // case have only 1 discount
-                const {totalPrice = 0, discountAmount = 0} = await discountServices.applyDiscountCode({
+                const {totalOrder, discountAmount, totalPrice } = await discountServices.applyDiscountCode({
                     code: shop_discounts[0].code,
                     shopId,
                     userId,
@@ -90,6 +90,7 @@ class CheckoutServices {
 
                 // total discount 
                 checkout_orders.total_discount += discountAmount;
+                console.log("🚀 ~ CheckoutServices ~ checkoutReview ~ discountAmount:", discountAmount)
 
                 if (discountAmount > 0) {
                     itemCheckout.priceApplyDiscount = checkoutPrice - discountAmount;

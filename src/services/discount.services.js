@@ -180,6 +180,7 @@ class DiscountServices {
          discount_type, 
          discount_value   
         } = foundDiscountCode;
+        console.log("🚀 ~ DiscountServices ~ foundDiscountCode:", foundDiscountCode)
 
         if(!discount_is_active) throw new BadRequestError('Discount is not active yet!');
         if(!discount_max_users) throw new BadRequestError('Discount code has been used up!');
@@ -191,9 +192,9 @@ class DiscountServices {
         if (discount_min_order_value > 0) {
            // get total value order
            totalOrder = products.reduce((acc, product ) => {
-            return acc + (product.product_price * product.product_quantity)
+            return acc + (product.price * product.quantity)
            }, 0);
-
+        
            if(totalOrder < discount_min_order_value) throw new BadRequestError(`Discount require minimum orders value is ${discount_min_order_value}`)
         }
         
@@ -205,6 +206,7 @@ class DiscountServices {
         } 
 
         const discountAmount = discount_type === 'fixed_amount' ? discount_value : totalOrder * (discount_value / 100);
+        console.log("🚀 ~ DiscountServices ~ discountAmount:", discountAmount)
 
         return {
             totalOrder,

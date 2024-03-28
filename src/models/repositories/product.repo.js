@@ -94,7 +94,7 @@ const findProductByIdCart = async ({productId}) => {
     return await product.findOne({_id: convertToObjectIdMongo(productId)}).lean();
 }
 const checkProductByServer = async (products) => {
-    return new Promise.all(
+    return Promise.all(
         products.map(async product => {
             const {productId, quantity} = product;
             const foundProduct = await findProductByIdCart({productId});
