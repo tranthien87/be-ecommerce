@@ -1,8 +1,10 @@
 'use strict'
+
 const {BadRequestError, NotFoundError} = require('../core/error.response');
 const { findCartById } = require("../models/repositories/cart.repo");
 const { checkProductByServer } = require('../models/repositories/product.repo');
 const {discountServices} = require('./discount.services');
+const { acquireLock, releaseLock } = require('./redis.services');
 
 class CheckoutServices {
     /**
@@ -114,11 +116,27 @@ class CheckoutServices {
     static async orderByUser({shop_order_ids, cartId, userId, checkout_address = {}, checkout_payment = {}}) {
         const {shop_order_ids_new, checkout_orders} = CheckoutServices.checkoutReview({cartId, userId, shop_order_ids});
         const products = shop_order_ids_new.flatMap(order => order.item_products);
+        let acquireProduct = [];
         // check inventory use optimissted key - redis 
         for (let i = 0; i < products.length; i++) {
             const {productId, quantity} = products[i];
+
+            const keyLock = await acquireLock(productId, quantity, cartId);
+            acquireProduct.push(keyLock ? true : false)
+
+            if (keyLock) {
+                await releaseLock(keyLock);
+            }
             
         }
+
+        if (acquireProduct.includes(false)) {
+            throw new BadRequestError('Some product has updated, please re-choosen a product')
+        }
+
+        const newOrder = await order.create();
+
+        return newOrder;
     }
 
 }
