@@ -6,6 +6,8 @@ const { checkProductByServer } = require('../models/repositories/product.repo');
 const {discountServices} = require('./discount.services');
 const { acquireLock, releaseLock } = require('./redis.services');
 
+const { order } = require('../models/order.model');
+
 class CheckoutServices {
     /**
      * Use for login and not login user
@@ -134,10 +136,29 @@ class CheckoutServices {
             throw new BadRequestError('Some product has updated, please re-choosen a product')
         }
 
-        const newOrder = await order.create();
+        const newOrder = await order.create({
+            order_userId: userId,
+            order_checkout: checkout_orders,
+            order_payment: checkout_payment,
+            order_shipping: checkout_address,
+            order_products: shop_order_ids_new
+        });
+
+        if(newOrder) {
+            // delete products in cart
+        }
 
         return newOrder;
     }
+
+    static async getOrdersByUser() {}
+
+    static async cancelOrderByUser() {}
+
+    static async getOrderByUserId() {}
+
+    static async updateStatusOrderByShop() {}
+
 
 }
 
