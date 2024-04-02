@@ -1,3 +1,4 @@
 node_modules
 .env
 /src/constants/redis
+/src/constants/redis/index.js
