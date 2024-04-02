@@ -17,8 +17,18 @@ app.use(express.urlencoded({
     extended: true
 }))
 
+
 // connect database mongoose
 require('./dbs/init.mongoosedb');
+
+// connect redis basic
+// const initRedis =  require('./dbs/init.redis.basic');
+// initRedis.connect();
+
+// connect redis pro
+const initRedis = require('./dbs/init.redis');
+initRedis.initRedis();
+
 
 // router init
 app.use('/', router);
