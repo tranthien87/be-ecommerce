@@ -1,35 +1,34 @@
 'use strict'
-
+require('dotenv').config()
 const redis = require('redis');
 
 const constants = require('../constants/redis');
 
 let client = {};
+const username = process.env.REDIS_ACCOUNT;
+const password = process.env.PASSWORD;
 
-const handleEventConnect = (redisClient) => {
-    redisClient.on(constants.CONNECT, () => console.log(`Redis client init connection.`));
-    redisClient.on(constants.ERROR, (err) => console.log(`Redis client connect error: `, err));
-    redisClient.on(constants.RECONNECTING, () => console.log(`Redis client reconnecting`));
-    redisClient.on(constants.END, () => console.log(`Redis client disconnected.`));
+
+const handleEventConnect = ({redisConnection}) => {
+    redisConnection.on(constants.CONNECT, () => console.log(`Redis client connected.`));
+    redisConnection.on(constants.ERROR, (err) => console.log(`Redis client connect error: `, err));
+    redisConnection.on(constants.RECONNECTING, () => console.log(`Redis client reconnecting`));
+    redisConnection.on(constants.END, () => console.log(`Redis client disconnected.`));
 }
 
-const initRedis = () => {
-    const redisClient = redis.createClient({
-        username: constants.USERNAME,
-        password: constants.PASSWORD,
-        socket: {
-            host: constants.REDIS_CONNECT_URL,
-            port: constants.PORT
-        }
-    });
-    redisClient.connect();
+const redisClient = redis.createClient({
+    url: `redis://${username}:${password}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
+});
+
+
+const initRedis =  () => {
     client.instanceConnect = redisClient;
-    handleEventConnect(redisClient)
+    handleEventConnect({redisConnection: redisClient})
 }
 
 const getRedis = () => {
-    if(!client.instanceConnect) {
-     initRedis();
+    if (!client.instanceConnect) {
+        client.instanceConnect = redisClient;
     }
     return client;
 };

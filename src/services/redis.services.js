@@ -2,12 +2,14 @@
 
 
 const { getRedis } = require('../dbs/init.redis');
-const { instanceConnect: client} = getRedis();
+const {instanceConnect: client} = getRedis();
+
 const {promisify} = require('util');
 const { reservationInventory } = require('../models/repositories/inventory.repo');
 
-const pexpire = promisify(client.pExpire).bind(client);
-const setnxAsync = promisify(client.setNX).bind(client);
+
+const pexpire = promisify(client.pexpire).bind(client);
+const setnxAsync = promisify(client.setnx).bind(client);
 
 const acquireLock = async (productId, quantity, cartId) => {
     const key  = `lock_v2024_${productId}`;
@@ -33,7 +35,6 @@ const acquireLock = async (productId, quantity, cartId) => {
         
     }
 }
-
 
 const releaseLock = async (keyLock) => {
     const delAsync = promisify(client.del).bind(client);
