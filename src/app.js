@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./routes')
 
-
+const PubSubService = require('./services/redisPubSub.services');
 
 // add midlewares
 app.use(morgan('dev'));
@@ -27,11 +27,20 @@ require('./dbs/init.mongoosedb');
 
 // connect redis pro
 const initRedis = require('./dbs/init.redis');
-initRedis.initRedis();
 
+initRedis.initRedis();
 
 // router init
 app.use('/', router);
+// const data = {"message": "hello"};
+
+// Pub Sub Test
+// setInterval(() => {PubSubService.publishToRedis('comments', JSON.stringify(data));}, 10000)
+
+// PubSubService.subscribeToRedis('comments', (channel, message) => {
+//     console.log(`Received message on channel ${channel}:`, message);
+// });
+// End Pub Sub Test
 
 // Handling Not Found Error
 app.use((req, res, next) => {
@@ -52,6 +61,5 @@ app.use((error, req, res, next) => {
         message: error.message || 'Internal server error !'
     })
 })
-
 
 module.exports = app;

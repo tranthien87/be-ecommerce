@@ -1,13 +1,11 @@
 'use strict'
 require('dotenv').config()
+
 const redis = require('redis');
 
 const constants = require('../constants/redis');
 
 let client = {};
-const username = process.env.REDIS_ACCOUNT;
-const password = process.env.PASSWORD;
-
 
 const handleEventConnect = ({redisConnection}) => {
     redisConnection.on(constants.CONNECT, () => console.log(`Redis client connected.`));
@@ -17,7 +15,7 @@ const handleEventConnect = ({redisConnection}) => {
 }
 
 const redisClient = redis.createClient({
-    url: `redis://${username}:${password}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
+    url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
 });
 
 
@@ -36,7 +34,6 @@ const getRedis = () => {
 const closeRedis = () => {
     client?.instanceConnect.disconnect();
 }
-
 
 module.exports = {
     initRedis,
