@@ -8,8 +8,16 @@ class CommentController {
     createComment = async (req, res, next) => {
         return new SuccessResponse({
             message: "Create new comment successfull!",
-            statusCode: StatusCodessCodes.CREATED,
+            statusCode: StatusCodes.CREATED,
             metadata: await CommentService.createComment(req.body)
+        }).send(res)
+    }
+
+    getCommentByParentId = async (req, res, next) => {
+        return new SuccessResponse({
+            message: "Get list comment successfull!",
+            statusCode: StatusCodes.OK,
+            metadata: await CommentService.getCommentByParentId(req.query)
         }).send(res)
     }
 }
