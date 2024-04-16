@@ -2,6 +2,7 @@
 
 const { NotFoundError, ConflictResponseError } = require('../core/error.response');
 const {comment: Comment} = require('../models/comment.model');
+const { findProductById } = require('../models/repositories/product.repo');
 const { convertToObjectIdMongo } = require('../utils');
 
 
@@ -101,6 +102,47 @@ class CommentService {
         }).sort({
             comment_left: 1
         })
+    }
+
+    static async deleteComment({commentId, productId}) {
+        // check products is exist
+        const foundProduct = await findProductById({
+            product_id: productId
+        });
+
+        if (!foundProduct) {
+            throw new NotFoundError("product not found")
+        }
+
+        const foundComment = await Comment.findById(commentId);
+        if (!foundComment) throw new NotFoundError('comment not found')
+
+        const leftValue = foundComment.comment_left;
+        const rightValue = foundComment.comment_right;
+
+        const width = rightValue - leftValue + 1;
+
+        await Comment.deleteMany({
+            comment_productId: convertToObjectIdMongo(productId),
+            comment_left: {$gte: leftValue, $lt: rightValue},
+        })
+
+        // update left-right 
+        await Comment.updateMany({
+            comment_productId: convertToObjectIdMongo(productId),
+            comment_right: {$gt: rightValue} 
+        }, {
+            $inc: {comment_right: -width}
+        })
+        await Comment.updateMany({
+            comment_productId: convertToObjectIdMongo(productId),
+            comment_left: {$gt: rightValue} 
+        }, {
+            $inc: {comment_left: -width}
+        })
+
+        return true;
+
     }
 }
 
