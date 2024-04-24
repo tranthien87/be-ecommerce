@@ -12,9 +12,13 @@ const { findAllDraftsForShop,
     updateProductById
  } = require('../models/repositories/product.repo')
 
- const {removeUndefineObject, updateNestedObjectParser} = require('../utils')
+ const {
+    removeUndefineObject,
+     updateNestedObjectParser
+    } = require('../utils')
 
  const {insertInventory} = require('../models/repositories/inventory.repo')
+const { pushNotiToSystem } = require("./notification.services")
 class ProductFactory {
 
     static productRegistery = {};
@@ -111,12 +115,24 @@ class Product {
         const newProduct =  await product.create({...this, _id: product_id});
        
         if(newProduct) {
+            // add product_stock in inventory collection
             await insertInventory({
                 productId: newProduct._id,
                 shopId: this.product_shop,
                 stock: this.product_quantity
             })
+            // push notication to system rabitmq
+            pushNotiToSystem({
+               type: "SHOP-001" ,
+               receivedId: 1, // maybe more than one
+               senderId: this.product_shop,
+               options: {
+                product_name: this.product_name,
+                shop_name: this.product_shop
+               }
+            }).then(re => console.log(rs)).catch(err => console.error(err))
         }
+
         return newProduct;
     }
     async updateProduct(productId, objParams) {
