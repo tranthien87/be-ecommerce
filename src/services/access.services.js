@@ -18,6 +18,7 @@ const rolesShop = {
     ADMIN: 'ADMIN'
 }
 class AccessService {
+
     static handlerRefreshTokenV2 = async ({refreshToken, user, keyStore}) => {
 
         const {userId, email} = user;
@@ -26,8 +27,8 @@ class AccessService {
             await KeyTokenServices.deleteKeyById(userId);
             throw new ForbiddenError('Something wrong happened! Pls re-login')
         }
-        if(keyStore.refreshToken !==  refreshToken)  throw new AuthFailueError('Shop not registered')
 
+        if(keyStore.refreshToken !==  refreshToken)  throw new AuthFailueError('Shop not registered')
         
         const foundShop = findByEmail({email});
        
@@ -51,33 +52,32 @@ class AccessService {
             tokens
         }
     }
+    
     static handlerRefreshToken = async (refreshToken) => {
         // check refreshToken was used
         const refreshTokenUsed = await KeyTokenServices.findByRefreshTokenUsed(refreshToken);
-        console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ refreshTokenUsed:", refreshTokenUsed)
+       
         if (refreshTokenUsed) {
             const {userId, email } = await verifyJWT(refreshToken, refreshTokenUsed.privateKey);
-            console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ email:", email)
-            console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ userId:", userId)
             await KeyTokenServices.deleteKeyById(userId);
             throw new ForbiddenError('Something wrong happened! Pls re-login')
         }
 
         const holderToken = await KeyTokenServices.findByRefreshToken(refreshToken);
-        console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ holderToken:", holderToken)
+        
         if (!holderToken) {
             throw new AuthFailueError('Shop not registered')
         }
         const {userId, email } = await verifyJWT(refreshToken, holderToken.privateKey);
         
         const foundShop = findByEmail({email});
-        console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ foundShop:", foundShop)
+        
         if (!foundShop) {
             throw new AuthFailueError('Shop not registered')
         }
         // create new pair tokens
         const tokens = await createTokenPair({userId, email}, holderToken.publicKey, holderToken.privateKey);
-        console.log("🚀 ~ AccessService ~ handlerRefreshToken= ~ tokens:", tokens)
+       
         // update token
         await holderToken.updateOne({
             $set: {
@@ -122,6 +122,7 @@ class AccessService {
             tokens
         }
     }
+
     static logout = async ({keyStore}) => {
         return await KeyTokenServices.removeKeyById(keyStore._id)
     }
