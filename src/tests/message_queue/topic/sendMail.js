@@ -12,7 +12,12 @@ const sendMail = async({message}) => {
             durable: true
         })
 
-        await channel.publish(exchangeName, '', Buffer.from(message)); // publish message
+        console.log(agrv);
+        const message = agrv[1];
+        const topic = agrv[0]
+
+
+        await channel.publish(exchangeName, topic , Buffer.from(message)); // publish message
 
         console.log(`Message sen OK:: ${message}`);
 

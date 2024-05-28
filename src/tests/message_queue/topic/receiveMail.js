@@ -7,7 +7,7 @@ const receiveMail = async () => {
         const channel = await connect.createChannel();
         // create exchange
         const exchangeName = 'send_email';
-        await channel.assertExchange(exchangeName, 'fanout', {
+        await channel.assertExchange(exchangeName, 'topic', {
             durable: true
         })
 
@@ -17,11 +17,20 @@ const receiveMail = async () => {
         }); // create a random queue
         console.log(`Name queue:: ${queue}`);
         // bindding queue  to exchange
+        const agrv = process.argv.slice(2);
+        console.log('agrv', process.argv);
+        if (!agrv.length) {
+            process.exit(0)
+        }
 
-        await channel.bindQueue(queue, exchangeName, ''); // bind queue to exchange
+       
+        agrv.forEach(async key => {
+            await channel.bindQueue(queue, exchangeName, key); // bind queue to exchange
+        })
+
         // consume message
         await channel.consume(queue, (msg) => { 
-             console.log(`Message recieved :: ${msg.content.toString()}`); 
+             console.log(`routing key : ${msg.fields.routingKey} - Message recieved :: ${msg.content.toString()}`); 
             }, {
                 noAck: true     
             })
