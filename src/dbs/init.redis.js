@@ -3,15 +3,13 @@ require('dotenv').config()
 
 const redis = require('redis');
 
-const constants = require('../constants/redis');
-
 let client = {};
 
 const handleEventConnect = ({redisConnection}) => {
-    redisConnection.on(constants.CONNECT, () => console.log(`Redis client connected.`));
-    redisConnection.on(constants.ERROR, (err) => console.log(`Redis client connect error: `, err));
-    redisConnection.on(constants.RECONNECTING, () => console.log(`Redis client reconnecting`));
-    redisConnection.on(constants.END, () => console.log(`Redis client disconnected.`));
+    redisConnection.on('connect', () => console.log(`Redis client connected.`));
+    redisConnection.on('error', (err) => console.log(`Redis client connect error: `, err));
+    redisConnection.on('reconnecting', () => console.log(`Redis client reconnecting`));
+    redisConnection.on('end', () => console.log(`Redis client disconnected.`));
 }
 
 const redisClient = redis.createClient({
