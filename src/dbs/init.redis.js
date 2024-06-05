@@ -18,6 +18,7 @@ const redisClient = redis.createClient({
 
 
 const initRedis =  () => {
+    console.log(process.env.REDIS_USERNAME);
     client.instanceConnect = redisClient;
     handleEventConnect({redisConnection: redisClient})
 }
