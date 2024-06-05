@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./routes')
 
-const PubSubService = require('./services/redisPubSub.services');
+// const PubSubService = require('./services/redisPubSub.services');
 
 // add midlewares
 app.use(morgan('dev'));
