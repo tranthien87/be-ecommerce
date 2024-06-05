@@ -2,8 +2,8 @@
 
 const redis = require('redis');
 const redisClient = redis.createClient({
-    username:'sakura',
-    password: 'Aa1234a@',
+    username: process.env.REDIS_USERNAME,
+    password: process.env.REDIS_PASSWORD,
     socket: {
         host: 'redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com',
         port: 13239
