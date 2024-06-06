@@ -6,6 +6,10 @@ const dev = {
         host: process.env.DEV_APP_HOST ||  '127.0.0.1',
         name: process.env.DEV_DB_NAME || 'shopDEV',
         port: process.env.DEV_DB_PORT || 27017,
+    },
+    clouddb: {
+        username: process.env.MONGO_USERNAME,
+        password: process.env.MONGO_PASSWORD
     }
 }
 const pro = {
