@@ -17,7 +17,7 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-app.get('/test', (req, res) => {
+app.get('/api/test', (req, res) => {
     res.send({
         metadata: {
             name: "shop dev",
