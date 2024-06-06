@@ -17,7 +17,14 @@ app.use(express.urlencoded({
     extended: true
 }))
 
-
+app.get('/test', (req, res) => {
+    res.send({
+        metadata: {
+            name: "shop dev",
+            age: 23
+        }
+    })
+  })
 // connect database mongoose
 require('./dbs/init.mongoosedb');
 
