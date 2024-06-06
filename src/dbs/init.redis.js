@@ -1,7 +1,7 @@
 'use strict'
-require('dotenv').config()
 
 const redis = require('redis');
+const {app: {username, password, port, url}} = require('../configs/config.redis');
 
 let client = {};
 
@@ -13,7 +13,7 @@ const handleEventConnect = ({redisConnection}) => {
 }
 
 const redisClient = redis.createClient({
-    url: `redis://${process.env.REDIS_USERNAME}:${process.env.REDIS_PASSWORD}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
+    url: `redis://${username}:${password}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
 });
 
 
