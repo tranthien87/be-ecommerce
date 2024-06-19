@@ -25,7 +25,7 @@ const roleSchema = new Schema({
     role_description: {type: String, default: ''},
     role_grants: [{
         resource: {type: Schema.Types.ObjectId, ref: 'Resource', require: true},
-        actions: { type: String, require: true},
+        actions: [{ type: String, require: true}],
         attributes: {type: String, default: '*'}
     }]
 }, {
@@ -33,6 +33,4 @@ const roleSchema = new Schema({
     timestamps: true
 })
 
-module.exports = {
-    role: model(DOCUMENT_NAME, roleSchema)
-}
+module.exports =  model(DOCUMENT_NAME, roleSchema)

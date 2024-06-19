@@ -20,8 +20,7 @@ app.use(express.urlencoded({
 app.get('/api/test', (req, res) => {
     res.send({
         metadata: {
-            name: "shop dev",
-            age: 23
+            name: "shop dev api"
         }
     })
   })
