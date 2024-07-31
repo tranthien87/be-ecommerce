@@ -29,7 +29,7 @@ class AccessControler {
         return new SuccessResponse({
             message: 'Success login!',
             statusCode: StatusCodes.ACCEPTED,
-            metadata:  await AccessService.login(req.body),
+            metadata:  await AccessService.login({requestId: req.requestId, ...req.body}),
         
         }).send(res)   
     }
