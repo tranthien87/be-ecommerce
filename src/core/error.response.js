@@ -7,7 +7,7 @@ class ErrorResponse extends Error {
     constructor(message, status) {
         super(message)
         this.status = status
-        // logger.setInfoLog(this.message, [ '/v1/api/login', 'uuid', {}])
+    
     }
 
 }

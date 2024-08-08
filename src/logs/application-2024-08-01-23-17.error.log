@@ -1,0 +1,1 @@
+2024-08-01 11:17:09.148 PM - error - /v1/api/shop/login - cc54a39f-7fd1-4772-8e28-f77c87909ee9 - 403 - 1722529029147- Response:: {"status":403} - {"message":"Shop not registered!"}
