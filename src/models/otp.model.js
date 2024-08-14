@@ -16,4 +16,4 @@ const optSchema = new Schema({
     timestamps: true
 })
 
-export default model(DOCUMENT, optSchema)
+module.exports = model(DOCUMENT, optSchema)

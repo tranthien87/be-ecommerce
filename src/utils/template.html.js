@@ -1,9 +1,6 @@
 const templateHtmlEmailToken = () => {
     return `
-      <html>
-        <head></head>
-        <body></body>
-      </html>
+     Link Verify : {{link_verify}}
     `
 }
 
