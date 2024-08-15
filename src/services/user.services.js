@@ -21,12 +21,12 @@ const createNewUSer = async ({
 
    
 
-    return new SuccessResponse({
+    return {
         message: 'Verify email user',
         metadata: {
             token: result
         }
-    })
+    }
 
 }
 

@@ -4,7 +4,7 @@ const {replacePlaceholder} = require('../utils');
 const {newOtp} = require('./otp.services')
 const {getTemplate} = require('./template.services')
 
-const sendEmailLinkVerify =  ({
+const sendEmailLinkVerify = async ({
     html,
     toEmail,
     subject = 'Xac nhan email dang ki',
@@ -47,7 +47,7 @@ const sendEmailToken = async ({email = null}) => {
         const content = replacePlaceholder(
             templateEmail.temp_html, 
             {
-                link_verify: `http://localhost:3056/cgp/welcome-back/${token}`
+                link_verify: `http://localhost:3056/cgp/welcome-back/${token.opt_token}`
             }
         )
         // 4. send email
