@@ -5,12 +5,11 @@ const nodemailer = require('nodemailer');
 
 
 const transport = nodemailer.createTransport({
-    host: 'email-smtp.ap-southeast-1.amazonaws.com',
-    port: 465,
-    secure: true,
+    host: process.env.HOST_MAIL,
+    port: 2525,
     auth: {
-        user: 'AKIA4SW7WGZBCLIDGPGC',
-        pass: 'BK9TllDhe+6nBtD27dpJSAM+gTTL+vJ2imrVS+0qfLYk'
+        user: process.env.USERNAME_MAIL,
+        pass: process.env.PASSWORD_MAIL
     }
 })
 

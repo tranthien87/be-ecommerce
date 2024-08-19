@@ -7,23 +7,20 @@ const {getTemplate} = require('./template.services')
 const sendEmailLinkVerify = async ({
     html,
     toEmail,
-    subject = 'Xac nhan email dang ki',
-    text = 'Xac nhan ...'
+    subject
 }) => {
     try {
+        
         const emailOptions = {
-            form: '"SHOPDEV" <anonystick@gmail.com>',
+            form: process.env.EMAIL,
             to: toEmail,
             subject,
-            text
+            html
         }
 
-        transport.sendMail(emailOptions, (error, info) => {
-            if(error) {
-                return console.log(error);
-            }
-            console.log('Email send successful', info)
-        })
+        const info = await transport.sendMail(emailOptions);
+       
+        return info;
     } catch (error) {
         console.error(error);
         return error;
@@ -47,16 +44,18 @@ const sendEmailToken = async ({email = null}) => {
         const content = replacePlaceholder(
             templateEmail.temp_html, 
             {
-                link_verify: `http://localhost:3056/cgp/welcome-back/${token.opt_token}`
+                link_verify: `http://localhost:3056/cgp/welcome-back/${token.opt_token}`,
+                email
             }
         )
         // 4. send email
-        sendEmailLinkVerify({
+        const info = await sendEmailLinkVerify({
             html: content,
             toEmail: email,
-            subject: 'vui long xac nhan dia chi email dang ki shopdev',
+            subject: 'Registry email confirm from ShopDev',
         })
-        return 1;
+
+        return info;
 
     } catch (error) {
         console.error(error)

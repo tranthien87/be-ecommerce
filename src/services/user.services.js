@@ -2,6 +2,7 @@ const { ErrorResponse } = require('../core/error.response');
 const { SuccessResponse } = require('../core/success.response');
 const {sendEmailToken}  = require('../services/email.services')
 const USER = require('../models/user.model');
+const { log } = require('winston');
 
 const createNewUSer = async ({
     email = null, 
@@ -18,14 +19,10 @@ const createNewUSer = async ({
 
     // 3. send token via email to user
     const result = await sendEmailToken({email})
-
    
-
     return {
         message: 'Verify email user',
-        metadata: {
-            token: result
-        }
+        metadata: result
     }
 
 }

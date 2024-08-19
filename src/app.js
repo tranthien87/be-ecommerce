@@ -7,9 +7,12 @@ const app = express();
 const router = require('./routes');
 const { v4: uuidv4 } = require('uuid');
 const myLogger  = require('./logs/logger');
+const cors = require('cors')
 // const PubSubService = require('./services/redisPubSub.services');
 
 // add midlewares
+app.disable('x-powered-by');
+app.use(cors());
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(compression())
@@ -44,8 +47,8 @@ require('./dbs/init.mongoosedb');
 // initRedis.connect();
 
 // connect redis pro
-const initRedis = require('./dbs/init.redis');
-initRedis.initRedis();
+// const initRedis = require('./dbs/init.redis');
+// initRedis.initRedis();
 
 // router init
 app.use('/', router);
