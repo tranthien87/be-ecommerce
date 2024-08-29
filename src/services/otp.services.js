@@ -1,6 +1,7 @@
 
 const { randomInt } = require('crypto')
-const OTP = require('../models/otp.model')
+const OTP = require('../models/otp.model');
+const { NotFoundError } = require('../core/error.response');
 
 
 const generateToken = () => {
@@ -9,11 +10,20 @@ const generateToken = () => {
 
 const newOtp = async ({email}) => {
     const token = generateToken();
-    const newOpt = OTP.create({
+    const newOpt = await OTP.create({
         opt_token : token,
         opt_email: email
     })
     return newOpt;
 }
 
-module.exports = { newOtp }
+const checkTokenLogin = async ({token}) => {
+    const otp = await OTP.findOne({opt_token: token});
+    if(!otp) {
+        throw new NotFoundError('Otp not found.')
+    }
+    await OTP.deleteOne({opt_token: token})
+
+    return otp;
+}
+module.exports = { newOtp , checkTokenLogin}
