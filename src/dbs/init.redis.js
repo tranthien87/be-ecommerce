@@ -1,37 +1,51 @@
-'use strict'
+'use strict';
 
-const redis = require('redis');
-const {app: {username, password, port, url}} = require('../configs/config.redis');
+const { createClient } = require('redis');
+const { app: { port, url } } = require('../configs/config.redis');
 
-let client = {};
+let client = null;
 
-const handleEventConnect = ({redisConnection}) => {
+const handleEventConnect = (redisConnection) => {
     redisConnection.on('connect', () => console.log(`Redis client connected.`));
-    redisConnection.on('error', (err) => console.log(`Redis client connect error: `, err));
+    redisConnection.on('error', (err) => {
+        console.error(`Redis client connect error: `, err);
+        // Handle the error appropriately here
+        
+    });
     redisConnection.on('reconnecting', () => console.log(`Redis client reconnecting`));
     redisConnection.on('end', () => console.log(`Redis client disconnected.`));
 }
 
-const redisClient = redis.createClient({
-    url: `redis://${username}:${password}@redis-13239.c321.us-east-1-2.ec2.cloud.redislabs.com:13239`
-});
+const initRedis = async () => {
+    try {
+        const redisClient = createClient({
+            socket: {
+                host: url,
+                port: port
+            }
+        });
 
+        handleEventConnect(redisClient);
 
-const initRedis =  () => {
-    console.log(process.env.REDIS_USERNAME);
-    client.instanceConnect = redisClient;
-    handleEventConnect({redisConnection: redisClient})
+        await redisClient.connect();
+        client = redisClient;
+    } catch (error) {
+        console.error('Failed to connect to Redis:', error);
+    }
 }
 
 const getRedis = () => {
-    if (!client.instanceConnect) {
-        client.instanceConnect = redisClient;
+    if (!client) {
+        throw new Error('Redis client not initialized. Call initRedis() first.');
     }
     return client;
 };
 
-const closeRedis = () => {
-    client?.instanceConnect.disconnect();
+const closeRedis = async () => {
+    if (client) {
+        await client.disconnect();
+        client = null;
+    }
 }
 
 module.exports = {

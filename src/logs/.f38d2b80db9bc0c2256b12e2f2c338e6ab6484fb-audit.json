@@ -499,6 +499,386 @@
             "date": 1725165604238,
             "name": "src/logs/application-2024-09-01-11-40.error.log",
             "hash": "7729135066ae7457d617f6785a813db1f85123b8d38b43ff5781ec8a60039764"
+        },
+        {
+            "date": 1725165717754,
+            "name": "src/logs/application-2024-09-01-11-41.error.log",
+            "hash": "cdf614836d0207397e635277c63379c5d1894343b7ee3f5f9b4412d02e93c69b"
+        },
+        {
+            "date": 1725165765183,
+            "name": "src/logs/application-2024-09-01-11-42.error.log",
+            "hash": "d4e3a48fab64dd3a455b91a1614b182d001968aab29cb18e41d33f192619200d"
+        },
+        {
+            "date": 1725165903466,
+            "name": "src/logs/application-2024-09-01-11-45.error.log",
+            "hash": "917857b639356b42a81dd76e39f57d8f2ee413dad6d6f9aef40f4427e558f670"
+        },
+        {
+            "date": 1725165984208,
+            "name": "src/logs/application-2024-09-01-11-46.error.log",
+            "hash": "a86a2dc3b209459f752a296d4dd0c65896ece265867c9df8c3763b85243c02c3"
+        },
+        {
+            "date": 1725166070550,
+            "name": "src/logs/application-2024-09-01-11-47.error.log",
+            "hash": "4924c76bc1c71bd7f86bb2691c2ba57668cb4dc260f5b53c2c31e811e9e247d8"
+        },
+        {
+            "date": 1725166112349,
+            "name": "src/logs/application-2024-09-01-11-48.error.log",
+            "hash": "674c1494740b5852a976ec6fd80f82879185a4a9cfe950382685809a28a9ef83"
+        },
+        {
+            "date": 1725166189189,
+            "name": "src/logs/application-2024-09-01-11-49.error.log",
+            "hash": "d82db009c458bb7a66e89753c611f043e69879624b2677def1d86c3b9bcfe223"
+        },
+        {
+            "date": 1725166208119,
+            "name": "src/logs/application-2024-09-01-11-50.error.log",
+            "hash": "74cfcfbfd5eab5ba3ec49bc110ac44ebe098f5ce58f0e3bbd02c04545d621a28"
+        },
+        {
+            "date": 1725166609494,
+            "name": "src/logs/application-2024-09-01-11-56.error.log",
+            "hash": "fdde41f310c9e4eb20f9af42ba78e7810a0394f94dbd72836f5feab9bc4b7dfe"
+        },
+        {
+            "date": 1725166638871,
+            "name": "src/logs/application-2024-09-01-11-57.error.log",
+            "hash": "87559d90f286a80e12c7eef31235001db8067775e5af3324913bbfdb00c5f2eb"
+        },
+        {
+            "date": 1725166771222,
+            "name": "src/logs/application-2024-09-01-11-59.error.log",
+            "hash": "5a8c6a7c2badce570b5c8af5b0d1ce08ab05f6b2fcbcdf5f5e64b4dafa4bc6f5"
+        },
+        {
+            "date": 1725167197378,
+            "name": "src/logs/application-2024-09-01-12-06.error.log",
+            "hash": "8f4fe685d9ef85dd1d70855410984062dedf3281c2f3f511c2b922ec723feb59"
+        },
+        {
+            "date": 1725167259094,
+            "name": "src/logs/application-2024-09-01-12-07.error.log",
+            "hash": "a457bb142d32c9029e2b042a1ce4b29b25f5e7517a2499899e4a06a9f07b1b40"
+        },
+        {
+            "date": 1725167283101,
+            "name": "src/logs/application-2024-09-01-12-08.error.log",
+            "hash": "87a2551b3125a4b5d9142ee9d51ad72cfa4870869623130aa638c522665a0d09"
+        },
+        {
+            "date": 1725167721383,
+            "name": "src/logs/application-2024-09-01-12-15.error.log",
+            "hash": "b3abac761f89e81bf047c3fa19360299551e9784deea28b3b719d048cedbea6e"
+        },
+        {
+            "date": 1725167763529,
+            "name": "src/logs/application-2024-09-01-12-16.error.log",
+            "hash": "aabcfefa610a0cb83ef8e591d75795cb6921b12971750cae697e664f97431adb"
+        },
+        {
+            "date": 1725167896616,
+            "name": "src/logs/application-2024-09-01-12-18.error.log",
+            "hash": "ae6be9bd863f8fe73302206607a7d370ccf6890e85845c98d7011a609fe002d5"
+        },
+        {
+            "date": 1725167944255,
+            "name": "src/logs/application-2024-09-01-12-19.error.log",
+            "hash": "fe36fca7f900bb3dbce7d1f691f3c92763618b38f06ea7fef5b763ac18d9010e"
+        },
+        {
+            "date": 1725168176557,
+            "name": "src/logs/application-2024-09-01-12-22.error.log",
+            "hash": "a112cd7a3cc38685cdc47fca7771d013bc3b7cbc4ef5d5aacc1baf04ede4f612"
+        },
+        {
+            "date": 1725168182746,
+            "name": "src/logs/application-2024-09-01-12-23.error.log",
+            "hash": "cb0434af3e5f8fd39f1c9230269a0ec035d51dd85e58a879f5b790f55f348ece"
+        },
+        {
+            "date": 1725168299537,
+            "name": "src/logs/application-2024-09-01-12-24.error.log",
+            "hash": "c294f5f4457e59d58785e6b981e86455aef7b2b8341a22b1ccbf845ccc9a427e"
+        },
+        {
+            "date": 1725168516659,
+            "name": "src/logs/application-2024-09-01-12-28.error.log",
+            "hash": "ecaa61c515bef898f0e65f3be6756e73a8b01c5a1bc5004fcbdcee0c8971b4d2"
+        },
+        {
+            "date": 1725168540475,
+            "name": "src/logs/application-2024-09-01-12-29.error.log",
+            "hash": "558b1dad2150bac2642dae51a5c5726e8ba90b805d23596d4f34c4138c984c7d"
+        },
+        {
+            "date": 1725168708699,
+            "name": "src/logs/application-2024-09-01-12-31.error.log",
+            "hash": "a75a32e5a070d0e6e1645127f86fbd066bfffb9b3374620990042a12eb048094"
+        },
+        {
+            "date": 1725246416215,
+            "name": "src/logs/application-2024-09-02-10-06.error.log",
+            "hash": "8472ebecc38a584802e786751da9e138cabcfe93cda98cc06da91cf6c7a00de5"
+        },
+        {
+            "date": 1725246452758,
+            "name": "src/logs/application-2024-09-02-10-07.error.log",
+            "hash": "ae5be16f00b8344c96d399e3622e4074220565bd17046ae19671ff4be1aaad07"
+        },
+        {
+            "date": 1725246681081,
+            "name": "src/logs/application-2024-09-02-10-11.error.log",
+            "hash": "40179e7356be176eed3da9fcb1f1c12f7ca7f49a834d506786b16f78c7462338"
+        },
+        {
+            "date": 1725246726278,
+            "name": "src/logs/application-2024-09-02-10-12.error.log",
+            "hash": "7fc7e3fb42654f189f41bc9ec79ef3dafe40dad325ce94a4941a4a5b7d10e610"
+        },
+        {
+            "date": 1725246802438,
+            "name": "src/logs/application-2024-09-02-10-13.error.log",
+            "hash": "b3ae423fe69a9e01b26207e5da71ad6b2453218eaef3e20a93d69facb7a70d09"
+        },
+        {
+            "date": 1725247058991,
+            "name": "src/logs/application-2024-09-02-10-17.error.log",
+            "hash": "e15449877ae140960d3f0ada7d818ee87c664701a9c1dba54f86960b74aa6d3c"
+        },
+        {
+            "date": 1725247101944,
+            "name": "src/logs/application-2024-09-02-10-18.error.log",
+            "hash": "1f05fe6a169be2dd549b95f581d308763ba6c7947855df38be1b410f5ca8e5e5"
+        },
+        {
+            "date": 1725247140183,
+            "name": "src/logs/application-2024-09-02-10-19.error.log",
+            "hash": "0306c5be5b5d938fce2627dbb2b3f663bce0aa67e4b4cd08305609d1bdaf9581"
+        },
+        {
+            "date": 1725247255217,
+            "name": "src/logs/application-2024-09-02-10-20.error.log",
+            "hash": "c845ead3a86c431a6bc5fcffaf9c2d487d62154d75f704f55117ad429174e574"
+        },
+        {
+            "date": 1725247270364,
+            "name": "src/logs/application-2024-09-02-10-21.error.log",
+            "hash": "72077b69918dc4a6665465d92529a1ef752756c45f85ac17f409b11f5f4a8bb4"
+        },
+        {
+            "date": 1725247329713,
+            "name": "src/logs/application-2024-09-02-10-22.error.log",
+            "hash": "eddfb006ec203ad7566097bff4f96d2af9ba1c845f00ef69c3268c8a25f7c268"
+        },
+        {
+            "date": 1725247392941,
+            "name": "src/logs/application-2024-09-02-10-23.error.log",
+            "hash": "7c54685065881f1fa8ca8005333460230baa9b0e909c4304c822bea67bcc87b3"
+        },
+        {
+            "date": 1725247744500,
+            "name": "src/logs/application-2024-09-02-10-29.error.log",
+            "hash": "034030e20e5b35c88342583dc50545a0ba6d838711c7424c7bb77549ab440166"
+        },
+        {
+            "date": 1725247817205,
+            "name": "src/logs/application-2024-09-02-10-30.error.log",
+            "hash": "f2b7bbf949e21e33c6c624467fc60d6277d54ae4ed801b33eb731704f92c2746"
+        },
+        {
+            "date": 1725247926115,
+            "name": "src/logs/application-2024-09-02-10-32.error.log",
+            "hash": "e203d7a7c2b309e63bc100ee7c1eda82ba034ea59e067a43741c9869793582c0"
+        },
+        {
+            "date": 1725248387402,
+            "name": "src/logs/application-2024-09-02-10-39.error.log",
+            "hash": "37ecbdf8aa2d6afb26ef4bd499c453e04549110c04e3be9683ac6205b190112d"
+        },
+        {
+            "date": 1725248502968,
+            "name": "src/logs/application-2024-09-02-10-41.error.log",
+            "hash": "d2c0dfffe26fea8f343991ca7d3d772aac8f525d7aaf4e028da045d5498286a4"
+        },
+        {
+            "date": 1725248571555,
+            "name": "src/logs/application-2024-09-02-10-42.error.log",
+            "hash": "8e0028fea0c86d5ce71755d57823c285498a235aed5eed2fcb000b6da46d612c"
+        },
+        {
+            "date": 1725248582216,
+            "name": "src/logs/application-2024-09-02-10-43.error.log",
+            "hash": "11bce855786bb06db6889e9e41bd6c3fd99d575d4666ab952dced394cb950633"
+        },
+        {
+            "date": 1725248946074,
+            "name": "src/logs/application-2024-09-02-10-49.error.log",
+            "hash": "8161fb17e08c45f69fc680ae5161fd9a0fe63ecad528c809a2524e0428e21015"
+        },
+        {
+            "date": 1725249003511,
+            "name": "src/logs/application-2024-09-02-10-50.error.log",
+            "hash": "0e36f3428c7459f8f887608bd9d9f541759eed67e8fe39efbafb77b7007432eb"
+        },
+        {
+            "date": 1725249092637,
+            "name": "src/logs/application-2024-09-02-10-51.error.log",
+            "hash": "52faa96dec866e864fb9f1e467a352fde26d05f85f64a9808481f03e72fbd750"
+        },
+        {
+            "date": 1725249140706,
+            "name": "src/logs/application-2024-09-02-10-52.error.log",
+            "hash": "d3708082d6082eaa6233926d50c1a9ccb9e6c4e58299851f7e783de3abce4bd9"
+        },
+        {
+            "date": 1725249185428,
+            "name": "src/logs/application-2024-09-02-10-53.error.log",
+            "hash": "ae9bdff63810427647fe73eb5d5f2201fe7a74e8e36975d03dd50e17950b792e"
+        },
+        {
+            "date": 1725249280627,
+            "name": "src/logs/application-2024-09-02-10-54.error.log",
+            "hash": "3a661783779919474c46b3eef1f3bf7d11b4846a7c66afff61cb30f317d5448d"
+        },
+        {
+            "date": 1725249489453,
+            "name": "src/logs/application-2024-09-02-10-58.error.log",
+            "hash": "7cc6020dea5affadba504c65569c00c87ab6729e51e129ec7a229908cfadb39f"
+        },
+        {
+            "date": 1725250150023,
+            "name": "src/logs/application-2024-09-02-11-09.error.log",
+            "hash": "ee7ae27ff962949dc7b0f54ec82fe104f092e34ce8c42fbcb3b15b4cfd8e8b51"
+        },
+        {
+            "date": 1725250202246,
+            "name": "src/logs/application-2024-09-02-11-10.error.log",
+            "hash": "5e9cae491b3c43b71cae42ddc206dca400c8a535140087e64355b3ffe6304810"
+        },
+        {
+            "date": 1725250288909,
+            "name": "src/logs/application-2024-09-02-11-11.error.log",
+            "hash": "afa5b91aca28de4cf1e67c48ae73eca4663214869918f9484a751eea7f621650"
+        },
+        {
+            "date": 1725250334055,
+            "name": "src/logs/application-2024-09-02-11-12.error.log",
+            "hash": "220e81528d551c26b56236d290a61eb1191185a931b0d375bf413204b4fc402d"
+        },
+        {
+            "date": 1725250525907,
+            "name": "src/logs/application-2024-09-02-11-15.error.log",
+            "hash": "1bca32709c71e3851305676947d5166639f91d92bd14b8b26e66fc9b2fd94015"
+        },
+        {
+            "date": 1725250675111,
+            "name": "src/logs/application-2024-09-02-11-17.error.log",
+            "hash": "3113b84b3544d7e0a52d95f5d83262b7a6e231d713a3bd792f6b0fd845aeddaa"
+        },
+        {
+            "date": 1725250719958,
+            "name": "src/logs/application-2024-09-02-11-18.error.log",
+            "hash": "955c13f107e891e1778fff028b591928d9f99f7553b4e70742a3c36c13874e04"
+        },
+        {
+            "date": 1725250761364,
+            "name": "src/logs/application-2024-09-02-11-19.error.log",
+            "hash": "5debfe69590bb37be1e9693606bbec2612c68cb695ef52ba4b7d3053b948e180"
+        },
+        {
+            "date": 1725267727115,
+            "name": "src/logs/application-2024-09-02-16-02.error.log",
+            "hash": "f6ef50fa2dfc6a8797584b15989b5879192e6d109727eddfdeebc509eab7c09f"
+        },
+        {
+            "date": 1725267807925,
+            "name": "src/logs/application-2024-09-02-16-03.error.log",
+            "hash": "d25d6563c808f838a8fc61991780c55b0a1a941a0fad00812cd5f3949200b99a"
+        },
+        {
+            "date": 1725268010444,
+            "name": "src/logs/application-2024-09-02-16-06.error.log",
+            "hash": "fda7c8ee85d2bf3be766b65ecddc69a6e38cb0fd4eb3f7198863932e1acb4034"
+        },
+        {
+            "date": 1725282384699,
+            "name": "src/logs/application-2024-09-02-20-06.error.log",
+            "hash": "9ae040cf33ca4739eec580e0358fab692df5709f1caf69fd75c82f48a29f8517"
+        },
+        {
+            "date": 1725282883401,
+            "name": "src/logs/application-2024-09-02-20-14.error.log",
+            "hash": "5a883a9b336fbb1c925de121183ba1f1317ffbd61aa3b1654cf4408217b4d98c"
+        },
+        {
+            "date": 1725282927216,
+            "name": "src/logs/application-2024-09-02-20-15.error.log",
+            "hash": "151cc27763d2e7145de45295f60eef503cf69931c9fd7eaafe25d2591b22f2e9"
+        },
+        {
+            "date": 1725283131818,
+            "name": "src/logs/application-2024-09-02-20-18.error.log",
+            "hash": "b047bc90fbbac3066469404c172c5396c76430a361e2269b77763b5e0b6822d2"
+        },
+        {
+            "date": 1725283217215,
+            "name": "src/logs/application-2024-09-02-20-20.error.log",
+            "hash": "1b1373c51dbddf2a20eb3e3e1ac9ed3178ce56dc0d57acf84546992c3ef144f2"
+        },
+        {
+            "date": 1725283340124,
+            "name": "src/logs/application-2024-09-02-20-22.error.log",
+            "hash": "16278945176c797bb1c54652f736b87caec2c69fae70876e9a2b88f330034b57"
+        },
+        {
+            "date": 1725283620575,
+            "name": "src/logs/application-2024-09-02-20-27.error.log",
+            "hash": "d19367407738efad7fc1a03b9ded0d211e98ffde0a8b7f43eab5f7dc5a9bef1c"
+        },
+        {
+            "date": 1725283735068,
+            "name": "src/logs/application-2024-09-02-20-28.error.log",
+            "hash": "e8ade3049fb25f6fc9e26ebbe5353ae5bc3344f6bad7f61657e4bb7eb49f12cf"
+        },
+        {
+            "date": 1725283784368,
+            "name": "src/logs/application-2024-09-02-20-29.error.log",
+            "hash": "644fdd588be892b2598266e1695bb083ec6405326423c5980e3d6ef6a708ccf6"
+        },
+        {
+            "date": 1725283897545,
+            "name": "src/logs/application-2024-09-02-20-31.error.log",
+            "hash": "82e976500a6f7c97dde80fca0a254625b8fdae8ace83cae5952e193a66ef5a52"
+        },
+        {
+            "date": 1725284051030,
+            "name": "src/logs/application-2024-09-02-20-34.error.log",
+            "hash": "fb605f20a7cb46dcf23d9f7973db9dbe14fe9cb683b70053db6cbf1fd6fae2f0"
+        },
+        {
+            "date": 1725284150792,
+            "name": "src/logs/application-2024-09-02-20-35.error.log",
+            "hash": "4e17ee5f565fa7752a8f2caa88056c776629448daf5b4dfccdf8c5c4297ecd20"
+        },
+        {
+            "date": 1725284237003,
+            "name": "src/logs/application-2024-09-02-20-37.error.log",
+            "hash": "fe8c6397edc0b5a5c482a3acb8b534faa8458541d1fa1984bf1d8d2254ad0747"
+        },
+        {
+            "date": 1725284313708,
+            "name": "src/logs/application-2024-09-02-20-38.error.log",
+            "hash": "c72c3fea1b87f0032975a320a57db91a9647f396d1da9ac1dddd7b9085ab9b5e"
+        },
+        {
+            "date": 1725284558556,
+            "name": "src/logs/application-2024-09-02-20-42.error.log",
+            "hash": "dcd658c0c89b854cbaf8842c4f09e754f338ce05c6d3e04814899e9c63bf26ea"
         }
     ],
     "hashType": "sha256"

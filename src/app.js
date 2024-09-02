@@ -46,9 +46,7 @@ require('./dbs/init.mongoosedb');
 // const initRedis =  require('./dbs/init.redis.basic');
 // initRedis.connect();
 
-// connect redis pro
-const {initRedis, getRedis} = require('./dbs/init.redis');
-initRedis();
+
 // router init
 app.use('/', router);
 // const data = {"message": "hello"};
