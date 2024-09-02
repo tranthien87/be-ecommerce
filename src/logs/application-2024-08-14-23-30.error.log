@@ -1,1 +1,0 @@
-2024-08-14 11:30:59.762 PM - error - /v1/api/user/new_user - 94f8c090-4d3c-410d-a67c-0b207946f4d4 - 401 - 1723653059761- Response:: {"status":401} - {"message":"Invalid request"}

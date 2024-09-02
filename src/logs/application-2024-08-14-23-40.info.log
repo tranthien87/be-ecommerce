@@ -1,2 +1,0 @@
-2024-08-14 11:40:11.964 PM - info - /v1/api/user/new_user - 21a38005-0777-45e4-ab2a-e20f51474e61 - input params:: POST - {"email":"tranthien8789@gmail.com"}
-2024-08-14 11:40:15.300 PM - error - /v1/api/user/new_user - 21a38005-0777-45e4-ab2a-e20f51474e61 - undefined - 1723653615300- Response:: {} - {"message":"Class constructor SuccessResponse cannot be invoked without 'new'"}

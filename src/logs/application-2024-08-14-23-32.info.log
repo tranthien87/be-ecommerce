@@ -1,4 +1,0 @@
-2024-08-14 11:32:26.055 PM - info - /v1/api/user/new_user - 88df4b8e-e3c1-4db7-9584-ddaab7cc8f7b - input params:: POST - {"email":"tranthien8789@gmail.com"}
-2024-08-14 11:32:28.037 PM - error - /v1/api/user/new_user - 88df4b8e-e3c1-4db7-9584-ddaab7cc8f7b - 401 - 1723653148037- Response:: {"status":401} - {"message":"Invalid request"}
-2024-08-14 11:32:37.613 PM - info - /v1/api/user/new_user - 5d7ce8b4-87bc-495c-8221-90ab2a32f2c5 - input params:: POST - {"email":"tranthien8789@gmail.com"}
-2024-08-14 11:32:40.527 PM - error - /v1/api/user/new_user - 5d7ce8b4-87bc-495c-8221-90ab2a32f2c5 - undefined - 1723653160527- Response:: {} - {"message":"sendEmailToken is not defined"}

@@ -1,1 +1,0 @@
-2024-08-14 11:39:53.379 PM - error - /v1/api/user/new_user - ce55aad7-67a6-4d63-9c4f-8e6f806bdc00 - undefined - 1723653593378- Response:: {} - {"message":"sendEmailToken is not a function"}
