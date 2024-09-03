@@ -10,9 +10,14 @@ const handleEventConnect = (redisConnection) => {
     redisConnection.on('error', (err) => {
         console.error(`Redis client connect error: `, err);
         // Handle the error appropriately here
-        
+
     });
-    redisConnection.on('reconnecting', () => console.log(`Redis client reconnecting`));
+    redisConnection.on('reconnecting', () => {
+        console.log(`Redis client reconnecting`);
+        setTimeout(async () => {
+            await closeRedis(); // Disconnect after a delay if reconnecting
+        }, 5000);
+    });
     redisConnection.on('end', () => console.log(`Redis client disconnected.`));
 }
 
