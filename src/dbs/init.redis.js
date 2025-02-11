@@ -29,11 +29,10 @@ const initRedis = async () => {
                 port: port
             }
         });
-
-        handleEventConnect(redisClient);
-
-        await redisClient.connect();
         client = redisClient;
+        handleEventConnect(redisClient);
+        await redisClient.connect();
+        
     } catch (error) {
         console.error('Failed to connect to Redis:', error);
     }

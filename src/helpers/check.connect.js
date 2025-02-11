@@ -1,10 +1,10 @@
-const { log } = require('console');
+
 const mongoose = require('mongoose');
 const os = require('os');
 const process = require('process');
 
 // console.log(process.env);
-const SECOND = 5000;
+const SECOND = 50000;
 
 const countConnect = () => {
     const connectNum = mongoose.connections.length;
